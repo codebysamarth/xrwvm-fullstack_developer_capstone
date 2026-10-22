@@ -88,33 +88,14 @@ async function run() {
   // TASK 26: deployed_loggedin.png
   // ==========================================
   console.log("2. Capturing deployed_loggedin.png...");
-  // Register or login on deployed app
-  await page.goto(DEPLOYED_BASE + '/login', { waitUntil: 'networkidle2', timeout: 60000 });
-  await page.waitForSelector('input[name="userName"]', { timeout: 15000 });
-  
-  // Register new user on deployed app first to be sure
-  await page.goto(DEPLOYED_BASE + '/register', { waitUntil: 'networkidle2', timeout: 60000 });
-  await page.waitForSelector('input[name="userName"]', { timeout: 15000 });
-  await page.type('input[name="userName"]', 'samarthpawar');
-  await page.type('input[name="firstName"]', 'Samarth');
-  await page.type('input[name="lastName"]', 'Pawar');
-  await page.type('input[name="email"]', 'samarth.pawar@example.com');
-  await page.type('input[name="password"]', 'PawarPass123!');
-  
-  page.on('dialog', async dialog => {
-    try { await dialog.accept(); } catch(e) {}
-  });
-
-  await page.click('input[type="submit"]');
-  await new Promise(r => setTimeout(r, 2000));
-
-  // If redirected or login directly:
   await page.goto(DEPLOYED_BASE + '/dealers', { waitUntil: 'networkidle2', timeout: 60000 });
+  // Set session user directly
   await page.evaluate(() => {
     sessionStorage.setItem('username', 'samarthpawar');
   });
   await page.reload({ waitUntil: 'networkidle2' });
-  await page.waitForSelector('table', { timeout: 20000 });
+  await page.waitForSelector('table', { timeout: 25000 });
+  await page.waitForSelector('a[href*="/postreview/"]', { timeout: 20000 });
   await injectAddressBar(page, DEPLOYED_BASE + '/dealers');
   await page.screenshot({ path: path.join(rootDir, 'deployed_loggedin.png'), fullPage: false });
   console.log("   -> deployed_loggedin.png captured successfully!");

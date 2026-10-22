@@ -117,6 +117,8 @@ def get_dealer_details(request, dealer_id):
     if dealer_id:
         endpoint = "/fetchDealer/" + str(dealer_id)
         dealership = get_request(endpoint)
+        if dealership is not None and not isinstance(dealership, list):
+            dealership = [dealership]
         return JsonResponse({"status": 200, "dealer": dealership if dealership is not None else []})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})

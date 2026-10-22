@@ -74,9 +74,9 @@ def _fallback_get(endpoint):
     if endpoint.startswith("/fetchDealer/"):
         try:
             dealer_id = int(endpoint.replace("/fetchDealer/", "").strip())
-            return next((d for d in _in_memory_dealers if d.get('id') == dealer_id), None)
+            return [d for d in _in_memory_dealers if d.get('id') == dealer_id]
         except Exception:
-            return None
+            return []
     if endpoint.startswith("/fetchReviews/dealer/"):
         try:
             dealer_id = int(endpoint.replace("/fetchReviews/dealer/", "").strip())
