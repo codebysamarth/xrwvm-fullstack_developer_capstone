@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: dealerships-capstone
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r server/requirements.txt
+      pip install gunicorn flask nltk
+      python -c "import nltk; nltk.download('vader_lexicon')"
+      cd server/frontend && npm install && npm run build && cd ../..
+      python server/manage.py makemigrations djangoapp
+      python server/manage.py migrate
+      python -c "import os, django; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproj.settings'); import sys; sys.path.insert(0, 'server'); django.setup(); from djangoapp.populate import initiate; initiate()"
+      python -c "import os, django; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproj.settings'); import sys; sys.path.insert(0, 'server'); django.setup(); from django.contrib.auth.models import User; User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@example.com', 'AdminUser123!')"
+    startCommand: cd server && gunicorn djangoproj.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: NODE_VERSION
+        value: 18.18.0
