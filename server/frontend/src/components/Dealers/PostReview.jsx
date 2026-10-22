@@ -14,7 +14,7 @@ const PostReview = () => {
   const [carmodels, setCarmodels] = useState([]);
 
   let curr_url = window.location.href;
-  let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
+  let root_url = window.location.origin + "/";
   let params = useParams();
   let id =params.id;
   let dealer_url = root_url+`djangoapp/dealer/${id}`;
