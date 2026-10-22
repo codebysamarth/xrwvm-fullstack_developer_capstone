@@ -1,0 +1,12 @@
+Command:
+curl -i "http://localhost:5050/analyze/Fantastic%20services"
+
+Output:
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.13.14
+Date: Thu, 22 Oct 2026 14:51:39 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 25
+Connection: close
+
+{"sentiment": "positive"}

@@ -1,0 +1,15 @@
+Command:
+curl -i http://localhost:8000/djangoapp/dealer/1
+
+Output:
+HTTP/1.1 200 OK
+Date: Thu, 22 Oct 2026 14:55:57 GMT
+Server: WSGIServer/0.2 CPython/3.13.14
+Content-Type: application/json
+X-Frame-Options: DENY
+Content-Length: 230
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+{"status": 200, "dealer": [{"id": 1, "city": "El Paso", "state": "Texas", "st": "TX", "address": "3 Nova Court", "zip": "88563", "lat": 31.6948, "long": -106.3, "short_name": "Holdlamis", "full_name": "Holdlamis Car Dealership"}]}

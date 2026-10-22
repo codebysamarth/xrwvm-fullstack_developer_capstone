@@ -1,0 +1,17 @@
+Command:
+curl -i -X POST http://localhost:8000/djangoapp/login -H "Content-Type: application/json" -d "{\"userName\":\"testuser\",\"password\":\"[REDACTED]\"}"
+
+Output:
+HTTP/1.1 200 OK
+Date: Thu, 22 Oct 2026 14:50:43 GMT
+Server: WSGIServer/0.2 CPython/3.13.14
+Content-Type: application/json
+X-Frame-Options: DENY
+Content-Length: 51
+Vary: Cookie
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie: sessionid=[REDACTED]; expires=Thu, 05 Nov 2026 14:50:43 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax
+
+{"userName": "testuser", "status": "Authenticated"}

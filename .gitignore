@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Node dependencies and temp files
+node_modules/
+cookies.txt
+test_login.json
+test_reg.json
+

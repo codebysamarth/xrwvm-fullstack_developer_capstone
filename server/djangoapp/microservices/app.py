@@ -8,13 +8,11 @@ sia = SentimentIntensityAnalyzer()
 
 @app.get('/')
 def home():
-    return "Welcome to the Sentiment Analyzer. \
-    Use /analyze/text to get the sentiment"
+    return "Welcome to the Sentiment Analyzer. Use /analyze/text to get the sentiment"
 
 
 @app.get('/analyze/<input_txt>')
 def analyze_sentiment(input_txt):
-
     scores = sia.polarity_scores(input_txt)
     print(scores)
     pos = float(scores['pos'])
@@ -32,4 +30,4 @@ def analyze_sentiment(input_txt):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5050)
