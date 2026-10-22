@@ -25,6 +25,7 @@ COPY --from=frontend-builder /app/frontend/build ./server/frontend/build
 WORKDIR /app/server
 RUN python manage.py makemigrations djangoapp && \
     python manage.py migrate && \
+    python manage.py collectstatic --noinput && \
     python -c "import os, django; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproj.settings'); import sys; sys.path.insert(0, '.'); django.setup(); from djangoapp.populate import initiate; initiate()"
 
 EXPOSE 8000

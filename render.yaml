@@ -12,6 +12,7 @@ services:
       cd server/frontend && npm install && npm run build && cd ../..
       python server/manage.py makemigrations djangoapp
       python server/manage.py migrate
+      python server/manage.py collectstatic --noinput
       python -c "import os, django; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproj.settings'); import sys; sys.path.insert(0, 'server'); django.setup(); from djangoapp.populate import initiate; initiate()"
       python -c "import os, django; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoproj.settings'); import sys; sys.path.insert(0, 'server'); django.setup(); from django.contrib.auth.models import User; User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@example.com', 'AdminUser123!')"
     startCommand: cd server && gunicorn djangoproj.wsgi:application --bind 0.0.0.0:$PORT
